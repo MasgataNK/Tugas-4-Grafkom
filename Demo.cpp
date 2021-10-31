@@ -30,6 +30,9 @@ void Demo::DeInit() {
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
 	glDeleteBuffers(1, &EBO);
+	glDeleteVertexArrays(1, &VAO2);
+	glDeleteBuffers(1, &VBO2);
+	glDeleteBuffers(1, &EBO2);
 }
 
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
@@ -109,7 +112,7 @@ void Demo::ProcessInput(GLFWwindow *window) {
 }
 
 void Demo::Update(double deltaTime) {
-	
+	angle += (float)((deltaTime * 50.5f) / 1000);
 }
 
 void Demo::Render() {
@@ -197,7 +200,7 @@ void Demo::BuildColoredLemari() {
 	};
 
 	unsigned int indices[] = {
-		//0,  1,  2,  0,  2,  3,   // front
+		0,  1,  2,  0,  2,  3,   // front
 		4,  5,  6,  4,  6,  7,   // right
 		8,  9,  10, 8,  10, 11,  // back
 		12, 14, 13, 12, 15, 14,  // left
@@ -246,6 +249,16 @@ void Demo::DrawColoredLemari()
 	glUniform1i(glGetUniformLocation(this->shaderProgram, "ourTexture"), 0);
 
 	glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+
+	glm::mat4 model;
+	model = glm::translate(model, glm::vec3(0, 1, 0));
+
+	model = glm::rotate(model, angle, glm::vec3(0, -1, 0));
+
+	model = glm::scale(model, glm::vec3(1, 1, 1));
+
+	GLint modelLoc = glGetUniformLocation(this->shaderProgram, "model");
+	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
@@ -318,6 +331,10 @@ void Demo::DrawColoredLantai()
 
 	glBindVertexArray(VAO2); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 
+	glm::mat4 model;
+	GLint modelLoc = glGetUniformLocation(this->shaderProgram, "model");
+	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+	
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
