@@ -40,12 +40,33 @@
     <None Include="vertexShader.vert">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="..\Lesson09\depthMap.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Lesson09\depthMap.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Lesson09\shadowMapping.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Lesson09\shadowMapping.vert">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="lantai.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="lemari.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="LemariGelap.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="lantaiGelap.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="lemaritransparan.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
